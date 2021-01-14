@@ -3,15 +3,15 @@ import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, T
 import {IUser} from "./type";
 import {useHistory} from "react-router-dom";
 import useAxios from "axios-hooks";
-import {IStoreContext} from "../../_store";
-import StoreContext from "../../_store/Context";
+import {IStoreContext, StoreContext} from "../../_store";
+import {setStoreUsers} from "../../_store/_actions/user";
 
 /**
  * Component File Description
  */
 const List: FC<any> = () => {
     const {push} = useHistory();
-    const {store: {users}, setStore}: IStoreContext = useContext<IStoreContext>(StoreContext);
+    const {store: {users}, dispatch}: IStoreContext = useContext<IStoreContext>(StoreContext);
     const [, usersRequest] = useAxios({
         url: 'https://reqres.in/api/users?per_page=12',
         method: 'get'
@@ -19,11 +19,13 @@ const List: FC<any> = () => {
 
     const getUser = async () => {
         const {data, status} = await usersRequest();
-        if (status === 200) setStore({users: data?.data});
+        if (status === 200) {
+            dispatch(setStoreUsers(data?.data));
+        }
     };
 
     useEffect(() => {
-        if (!users.length) {
+        if (!users?.length) {
             getUser();
         }
         // eslint-disable-next-line
@@ -32,7 +34,7 @@ const List: FC<any> = () => {
     const deleteUser = (userId: number) => {
         const filterList: IUser[] = [...users];
         filterList.splice(filterList.findIndex((item: IUser) => item.id === userId), 1);
-        setStore({users: filterList});
+        dispatch(setStoreUsers(filterList));
     };
 
     return (

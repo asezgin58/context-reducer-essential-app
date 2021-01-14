@@ -1,8 +1,7 @@
 import {FC, useContext} from "react";
 import {Button} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
-import {IStoreContext} from "../../_store";
-import StoreContext from "../../_store/Context";
+import {IStoreContext, StoreContext} from "../../_store";
 
 /**
  * Component File Description

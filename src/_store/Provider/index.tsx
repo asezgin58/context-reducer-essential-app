@@ -1,20 +1,14 @@
-import {useState} from 'react';
+import {useReducer} from 'react';
 import StoreContext from '../Context';
-import {IStore, initialStoreData, IStoreValue} from "../type";
+import {initialStoreData, IStoreValue} from "../type";
+import storeReducer from "../_reducers";
 
 const StoreProvider = (props: any) => {
-    const [store, setStore] = useState<IStore>(initialStoreData);
-
-    const handleSetStore = (data: any) => {
-        setStore((prevState) => ({
-            ...prevState,
-            ...data,
-        }));
-    };
+    const [store, dispatch] = useReducer(storeReducer, initialStoreData);
 
     const storeValue: IStoreValue = {
         store,
-        setStore: (data: any) => handleSetStore(data)
+        dispatch
     };
 
     return (

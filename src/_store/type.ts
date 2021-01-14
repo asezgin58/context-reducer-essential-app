@@ -8,7 +8,7 @@ export interface IStore {
 
 export type IStoreValue = {
     store: IStore;
-    setStore: (data: any) => void
+    dispatch: any;
 }
 
 export const initialStoreData: IStore = {
