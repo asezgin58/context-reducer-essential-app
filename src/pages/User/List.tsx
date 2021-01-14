@@ -4,7 +4,7 @@ import {IUser} from "./type";
 import {useHistory} from "react-router-dom";
 import useAxios from "axios-hooks";
 import {IStoreContext, StoreContext} from "../../_store";
-import {setStoreUsers} from "../../_store/_actions/user";
+import {deleteStoreUser, setStoreUsers} from "../../_store/_actions/user";
 
 /**
  * Component File Description
@@ -31,12 +31,6 @@ const List: FC<any> = () => {
         // eslint-disable-next-line
     }, []);
 
-    const deleteUser = (userId: number) => {
-        const filterList: IUser[] = [...users];
-        filterList.splice(filterList.findIndex((item: IUser) => item.id === userId), 1);
-        dispatch(setStoreUsers(filterList));
-    };
-
     return (
         <>
             <h1>User List</h1>
@@ -55,26 +49,26 @@ const List: FC<any> = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {users.map((row: IUser, index: number) => (
-                                    <TableRow key={row.id}>
+                                {users.map((item: IUser, index: number) => (
+                                    <TableRow key={item.id}>
                                         <TableCell component="th" scope="row">
                                             {index + 1}
                                         </TableCell>
-                                        <TableCell>{row.first_name}</TableCell>
-                                        <TableCell>{row.last_name}</TableCell>
-                                        <TableCell>{row.email}</TableCell>
+                                        <TableCell>{item.first_name}</TableCell>
+                                        <TableCell>{item.last_name}</TableCell>
+                                        <TableCell>{item.email}</TableCell>
                                         <TableCell align="right" style={{width: 100}}>
                                             <Button
                                                 variant="contained"
                                                 color="primary"
-                                                onClick={() => push(`/user/detail/${row.id}`)}
+                                                onClick={() => push(`/user/detail/${item.id}`)}
                                             >Detail</Button>
                                         </TableCell>
                                         <TableCell align="right" style={{width: 100}}>
                                             <Button
                                                 variant="contained"
                                                 color="secondary"
-                                                onClick={() => deleteUser(row.id)}
+                                                onClick={() => dispatch(deleteStoreUser(item.id))}
                                             >Delete</Button>
                                         </TableCell>
                                     </TableRow>
