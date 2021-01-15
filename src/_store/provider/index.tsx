@@ -1,10 +1,11 @@
 import {useReducer} from 'react';
-import StoreContext from '../Context';
-import {initialStoreData, IStoreValue} from "../type";
-import storeReducer from "../_reducers";
+import StoreContext from '../context';
+import {IStoreValue} from "../type";
+import {storeReducer, defaultStoreData} from "../_reducers";
 
 const StoreProvider = (props: any) => {
-    const [store, dispatch] = useReducer(storeReducer, initialStoreData);
+
+    const [store, dispatch] = useReducer(storeReducer, defaultStoreData);
 
     const storeValue: IStoreValue = {
         store,

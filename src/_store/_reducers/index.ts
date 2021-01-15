@@ -1,32 +1,19 @@
-import {IStore, initialStoreData} from "../type";
-import {IAction} from "../_actions/type";
-import {authorActions} from "../_actions/author";
-import {userActions} from "../_actions/user";
-import {IUser} from "../../pages/User/type";
+import combineReducers from 'react-combine-reducers';
+import authorReducer from './author';
+import userReducer from './user';
+import {IAuthor as Author, initialAuthorData} from "./author/type";
+import {initialUsersData, IUser as User} from "./user/type";
+import {storeVarNames} from "../type";
 
-const storeReducer = (state: IStore = initialStoreData, action: IAction): IStore => {
-    switch (action.type) {
-        case authorActions.SET_AUTHOR:
-            return {
-                ...state,
-                author: action.payload,
-            };
-        case userActions.SET_USERS:
-            return {
-                ...state,
-                users: action.payload,
-            };
-        case userActions.DELETE_USER:
-            const filterList: IUser[] = [...state.users];
-            filterList.splice(filterList.findIndex((item: IUser) => item.id === action.payload), 1);
+const [storeReducer, defaultStoreData] = combineReducers({
+    [storeVarNames.author]: [authorReducer, initialAuthorData],
+    [storeVarNames.users]: [userReducer, initialUsersData],
+});
 
-            return {
-                ...state,
-                users: filterList,
-            };
-        default:
-            return state;
-    }
-};
+export {
+    storeReducer,
+    defaultStoreData
+}
 
-export default storeReducer;
+export type IAuthor = Author;
+export type IUser = User;

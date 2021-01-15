@@ -1,9 +1,9 @@
 import {FC, useContext, useState} from 'react';
 import {Button, TextField} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
-import {IAuthor} from "./type";
 import {IStoreContext, StoreContext} from "../../_store";
-import {setStoreAuthor} from "../../_store/_actions/author";
+import {setStoreAuthor} from "../../_store/_actions";
+import {IAuthor} from "../../_store/_reducers";
 
 /**
  * Component File Description

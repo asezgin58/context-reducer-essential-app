@@ -1,5 +1,5 @@
-import StoreContext from './Context';
-import StoreProvider from './Provider';
+import StoreContext from './context';
+import StoreProvider from './provider';
 import {IStoreValue} from "./type";
 
 export {

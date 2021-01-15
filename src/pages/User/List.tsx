@@ -1,10 +1,10 @@
 import {FC, useContext, useEffect} from 'react';
 import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
-import {IUser} from "./type";
 import {useHistory} from "react-router-dom";
 import useAxios from "axios-hooks";
 import {IStoreContext, StoreContext} from "../../_store";
-import {deleteStoreUser, setStoreUsers} from "../../_store/_actions/user";
+import {deleteStoreUser, setStoreUsers} from "../../_store/_actions";
+import {IUser} from "../../_store/_reducers";
 
 /**
  * Component File Description

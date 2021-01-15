@@ -1,22 +1,17 @@
-import {IUser} from "../pages/User/type";
-import {IAuthor} from "../pages/Author/type";
+import {IAuthor} from "./_reducers/author/type";
+import {IUser} from "./_reducers/user/type";
+
+export enum storeVarNames {
+    author = 'author',
+    users = 'users'
+}
 
 export interface IStore {
-    author: IAuthor;
-    users: IUser[];
+    [storeVarNames.author]: IAuthor;
+    [storeVarNames.users]: IUser[];
 }
 
 export type IStoreValue = {
     store: IStore;
     dispatch: any;
 }
-
-export const initialStoreData: IStore = {
-    author: {
-        name: 'Aykut',
-        surname: 'Sezgin',
-        age: 26,
-        job: 'Front-End Developer'
-    },
-    users: []
-};

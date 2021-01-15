@@ -1,8 +1,8 @@
 import {FC, useContext} from "react";
 import {Button} from "@material-ui/core";
 import {useHistory, useParams} from "react-router-dom";
-import {IUser} from "./type";
 import {IStoreContext, StoreContext} from "../../_store";
+import {IUser} from "../../_store/_reducers";
 
 /**
  * Component File Description

@@ -1,5 +1,5 @@
 import {IAction} from "../type";
-import {IUser} from "../../../pages/User/type";
+import {IUser} from "../../_reducers";
 
 export enum userActions {
     SET_USERS = "SET_USERS",

@@ -1,5 +1,5 @@
 import {IAction} from "../type";
-import {IAuthor} from "../../../pages/Author/type";
+import {IAuthor} from "../../_reducers";
 
 export enum authorActions {
     SET_AUTHOR = "SET_AUTHOR"
