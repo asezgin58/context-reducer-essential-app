@@ -4,7 +4,7 @@ import {useHistory} from "react-router-dom";
 import {IStoreContext, StoreContext} from "../../_store";
 import {setStoreAuthor} from "../../_store/_actions";
 import {IAuthor} from "../../_store/_reducers";
-import {useContextSelector} from "use-context-selector";
+import {useContext, useContextSelector} from "use-context-selector";
 
 /**
  * Component File Description
@@ -12,7 +12,7 @@ import {useContextSelector} from "use-context-selector";
 const Edit: FC<any> = () => {
     const {push, goBack} = useHistory();
     const storeAuthor: IAuthor = useContextSelector<IStoreContext, IAuthor>(StoreContext, ({store}: IStoreContext) => store.author);
-    const dispatch: any = useContextSelector<IStoreContext, any>(StoreContext, (state: IStoreContext) => state.dispatch);
+    const {dispatch}: IStoreContext = useContext<IStoreContext>(StoreContext);
     const [author, setAuthor] = useState<IAuthor>(storeAuthor);
 
     const handleChange = (e: any) => {

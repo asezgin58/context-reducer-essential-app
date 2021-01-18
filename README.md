@@ -5,6 +5,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 This project was used with Context for state management.
 - Store management is provided with **useReducer**.
 - Actions and reducers were used.
+- [react-combine-reducers](https://www.npmjs.com/package/react-combine-reducers) were used.
+- [use-context-selector](https://www.npmjs.com/package/use-context-selector) were used.
 
 ## Available Scripts
 

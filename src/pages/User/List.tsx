@@ -5,7 +5,7 @@ import useAxios from "axios-hooks";
 import {IStoreContext, StoreContext} from "../../_store";
 import {deleteStoreUser, setStoreUsers} from "../../_store/_actions";
 import {IUser} from "../../_store/_reducers";
-import {useContextSelector} from "use-context-selector";
+import {useContext, useContextSelector} from "use-context-selector";
 
 /**
  * Component File Description
@@ -13,7 +13,7 @@ import {useContextSelector} from "use-context-selector";
 const List: FC<any> = () => {
     const {push} = useHistory();
     const users: IUser[] = useContextSelector<IStoreContext, IUser[]>(StoreContext, ({store}: IStoreContext) => store.users);
-    const dispatch: any = useContextSelector<IStoreContext, any>(StoreContext, (context: IStoreContext) => context.dispatch);
+    const {dispatch}: IStoreContext = useContext<IStoreContext>(StoreContext);
 
     const [, usersRequest] = useAxios({
         url: 'https://reqres.in/api/users?per_page=12',
