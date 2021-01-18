@@ -1,8 +1,9 @@
-import {FC, useContext} from "react";
+import {FC} from "react";
 import {Button} from "@material-ui/core";
 import {useHistory, useParams} from "react-router-dom";
 import {IStoreContext, StoreContext} from "../../_store";
 import {IUser} from "../../_store/_reducers";
+import {useContextSelector} from "use-context-selector";
 
 /**
  * Component File Description
@@ -10,8 +11,9 @@ import {IUser} from "../../_store/_reducers";
 const Detail: FC<any> = () => {
     const {push}: any = useHistory();
     const {id}: any = useParams();
-    const {store: {users}}: IStoreContext = useContext<IStoreContext>(StoreContext);
-    const user: IUser = users.filter((item: IUser) => item.id === parseInt(id))[0];
+    const user: IUser = useContextSelector<IStoreContext, IUser>(StoreContext, ({store}: IStoreContext) => {
+        return store.users.filter((item: IUser) => item.id === parseInt(id))[0];
+    });
 
     return (
         <>

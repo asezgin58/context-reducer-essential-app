@@ -1,17 +1,20 @@
-import {FC, useContext, useEffect} from 'react';
+import {FC, useEffect} from 'react';
 import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import useAxios from "axios-hooks";
 import {IStoreContext, StoreContext} from "../../_store";
 import {deleteStoreUser, setStoreUsers} from "../../_store/_actions";
 import {IUser} from "../../_store/_reducers";
+import {useContextSelector} from "use-context-selector";
 
 /**
  * Component File Description
  */
 const List: FC<any> = () => {
     const {push} = useHistory();
-    const {store: {users}, dispatch}: IStoreContext = useContext<IStoreContext>(StoreContext);
+    const users: IUser[] = useContextSelector<IStoreContext, IUser[]>(StoreContext, ({store}: IStoreContext) => store.users);
+    const dispatch: any = useContextSelector<IStoreContext, any>(StoreContext, (context: IStoreContext) => context.dispatch);
+
     const [, usersRequest] = useAxios({
         url: 'https://reqres.in/api/users?per_page=12',
         method: 'get'
